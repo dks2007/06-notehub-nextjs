@@ -9,10 +9,10 @@ export interface FetchNotesResponse {
 export type DeleteNoteResponse = Note;
 
 const API_BASE_URL = 'https://notehub-public.goit.study/api';
-const TOKEN = import.meta.env.VITE_NOTEHUB_TOKEN;
+const TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 
 if (!TOKEN) {
-  throw new Error('VITE_NOTEHUB_TOKEN is not defined');
+  throw new Error('NEXT_PUBLIC_NOTEHUB_TOKEN is not defined');
 }
 
 const api = axios.create({
@@ -30,6 +30,11 @@ export const fetchNotes = async (
   const response = await api.get<FetchNotesResponse>('/notes', {
     params: { page, perPage, search },
   });
+  return response.data;
+};
+
+export const fetchNoteById = async (id: string): Promise<Note> => {
+  const response = await api.get<Note>(`/notes/${id}`);
   return response.data;
 };
 

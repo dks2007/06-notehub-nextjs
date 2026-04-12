@@ -1,18 +1,20 @@
+'use client';
+
 import { useState } from 'react';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { useDebouncedCallback } from 'use-debounce';
 import { Toaster } from 'react-hot-toast';
-import { fetchNotes } from '../../services/noteService';
-import SearchBox from '../SearchBox/SearchBox';
-import NoteList from '../NoteList/NoteList';
-import Modal from '../Modal/Modal';
-import NoteForm from '../NoteForm/NoteForm';
-import Pagination from '../Pagination/Pagination';
-import Loader from '../Loader/Loader';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import styles from './App.module.css';
+import { fetchNotes } from '../../lib/api';
+import SearchBox from '../../components/SearchBox/SearchBox';
+import NoteList from '../../components/NoteList/NoteList';
+import Modal from '../../components/Modal/Modal';
+import NoteForm from '../../components/NoteForm/NoteForm';
+import Pagination from '../../components/Pagination/Pagination';
+import Loader from '../../components/Loader/Loader';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import css from './NotesPage.module.css';
 
-export default function App() {
+export default function NotesClient() {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -46,11 +48,11 @@ export default function App() {
   };
 
   return (
-    <div className={styles.app}>
+    <div className={css.app}>
       <Toaster />
-      <header className={styles.toolbar}>
+      <header className={css.toolbar}>
         <SearchBox value={search} onChange={handleSearchChange} />
-        <button className={styles.button} onClick={handleOpenModal} type="button">
+        <button className={css.button} onClick={handleOpenModal} type="button">
           Create note +
         </button>
       </header>
