@@ -1,0 +1,44 @@
+import axios from 'axios';
+import type { Note, CreateNoteRequest } from '../types/note';
+
+export interface FetchNotesResponse {
+  notes: Note[];
+  totalPages: number;
+}
+
+export type DeleteNoteResponse = Note;
+
+const API_BASE_URL = 'https://notehub-public.goit.study/api';
+const TOKEN = import.meta.env.VITE_NOTEHUB_TOKEN;
+
+if (!TOKEN) {
+  throw new Error('VITE_NOTEHUB_TOKEN is not defined');
+}
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    Authorization: `Bearer ${TOKEN}`,
+  },
+});
+
+export const fetchNotes = async (
+  page: number = 1,
+  perPage: number = 12,
+  search: string = ''
+): Promise<FetchNotesResponse> => {
+  const response = await api.get<FetchNotesResponse>('/notes', {
+    params: { page, perPage, search },
+  });
+  return response.data;
+};
+
+export const createNote = async (noteData: CreateNoteRequest): Promise<Note> => {
+  const response = await api.post<Note>('/notes', noteData);
+  return response.data;
+};
+
+export const deleteNote = async (id: string): Promise<DeleteNoteResponse> => {
+  const response = await api.delete<DeleteNoteResponse>(`/notes/${id}`);
+  return response.data;
+};
