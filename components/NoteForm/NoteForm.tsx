@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import type { CreateNoteRequest } from '../../types/note';
-import { createNote } from '../../lib/api';
+import { createNote } from '../../lib/server-actions';
 import styles from './NoteForm.module.css';
 
 const validationSchema = Yup.object({
