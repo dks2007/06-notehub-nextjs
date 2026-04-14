@@ -3,6 +3,7 @@ import './globals.css';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import TanStackProvider from '../components/TanStackProvider/TanStackProvider';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
   title: 'NoteHub',
@@ -22,6 +23,7 @@ export default function RootLayout({
           {children}
           <Footer />
         </TanStackProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
