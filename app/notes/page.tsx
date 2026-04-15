@@ -1,6 +1,7 @@
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 import { fetchNotes } from '../../lib/server-actions';
 import NotesClient from './Notes.client';
+// import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export default async function NotesPage() {
   const queryClient = new QueryClient();
@@ -14,5 +15,6 @@ export default async function NotesPage() {
     <HydrationBoundary state={dehydrate(queryClient)}>
       <NotesClient />
     </HydrationBoundary>
+    // <SpeedInsights/>
   );
 }
